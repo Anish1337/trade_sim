@@ -7,27 +7,24 @@ int main() {
     std::cout << std::format("Quantitative Trading Simulator - Backtesting Engine\n\n");
     
     try {
-        // Initialize backtester with SPY data and $100k initial capital
+        // Load SPY data with 100k capital
         std::string filename = "data/spy.csv";
         Backtester backtester(filename, 100000.0);
         
-        // Create and configure SMA Crossover strategy
-        // Short MA: 10 days, Long MA: 30 days
+        // Initialize SMA Crossover strategy
         SMACrossoverStrategy strategy(10, 30);
         std::cout << std::format("Running {} strategy...\n", strategy.get_name());
         
-        // Execute backtest
+        // Run backtest
         auto result = backtester.run_backtest(strategy);
-        
-        // Display comprehensive results
         result.print_summary();
         
-        // Export detailed results for further analysis
+        // Export results
         result.export_trades_csv("output/trades.csv");
         result.export_performance_csv("output/performance.csv");
         std::cout << std::format("\nResults exported to output/ directory\n");
         
-        // Display market data summary
+        // Summarize market data
         const auto& market_data = backtester.get_market_data();
         auto valid_data = DataLoader::filter_valid_data(market_data);
         auto price_range = DataLoader::get_price_range(market_data);
