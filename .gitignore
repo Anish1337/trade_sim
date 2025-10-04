@@ -1,0 +1,28 @@
+# Compiled binaries
+*.exe
+main
+a.out
+
+# Object files
+*.o
+*.obj
+
+# Build directories
+build/
+cmake-build-*/
+
+# IDE files
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+.vscode/c_cpp_properties.json
+
+# Temporary files
+*.tmp
+*.log
+core
+.DS_Store
+Thumbs.db
+
+# Test files
+test_*
