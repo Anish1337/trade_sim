@@ -37,7 +37,7 @@ void MeanReversionStrategy::on_bar(const MarketData& bar, Portfolio& portfolio) 
     // Buy signal: Price touches or goes below lower band (oversold)
     if (bar.close <= lower_band && !in_position) {
         if (portfolio.cash > bar.close * 100) {
-            portfolio.buy(bar.date, "SPY", bar.close, 100, 1.0);
+            portfolio.buy(bar.date, "QQQM", bar.close, 100, 1.0);
             in_position = true;
         }
     }
@@ -45,7 +45,7 @@ void MeanReversionStrategy::on_bar(const MarketData& bar, Portfolio& portfolio) 
     else if (bar.close >= upper_band && in_position) {
         if (portfolio.position > 0) {
             long sell_qty = std::min(portfolio.position, 100L);
-            portfolio.sell(bar.date, "SPY", bar.close, sell_qty, 1.0);
+            portfolio.sell(bar.date, "QQQM", bar.close, sell_qty, 1.0);
             in_position = false;
         }
     }
@@ -53,7 +53,7 @@ void MeanReversionStrategy::on_bar(const MarketData& bar, Portfolio& portfolio) 
     else if (bar.close >= sma && in_position) {
         if (portfolio.position > 0) {
             long sell_qty = std::min(portfolio.position, 100L);
-            portfolio.sell(bar.date, "SPY", bar.close, sell_qty, 1.0);
+            portfolio.sell(bar.date, "QQQM", bar.close, sell_qty, 1.0);
             in_position = false;
         }
     }

@@ -10,8 +10,8 @@ int main() {
     std::cout << std::format("Quantitative Trading Simulator - Backtesting Engine\n\n");
     
     try {
-        // Load SPY data with 100k capital
-        std::string filename = "data/spy.csv";
+        // Load QQQM data with 100k capital
+        std::string filename = "data/qqqm.csv";
         Backtester backtester(filename, 100000.0);
         
         // Initialize strategies

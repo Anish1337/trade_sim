@@ -22,14 +22,14 @@ void EMACrossoverStrategy::on_bar(const MarketData& bar, Portfolio& portfolio) {
         // Buy signal: short EMA crosses above long EMA
         if (prev_short_ema <= prev_long_ema && short_ema > long_ema) {
             if (portfolio.cash > bar.close * 100) { // Buy 100 shares if we have enough cash
-                portfolio.buy(bar.date, "SPY", bar.close, 100, 1.0);
+                portfolio.buy(bar.date, "QQQM", bar.close, 100, 1.0);
             }
         }
         // Sell signal: short EMA crosses below long EMA
         else if (prev_short_ema >= prev_long_ema && short_ema < long_ema) {
             if (portfolio.position > 0) {
                 long sell_qty = std::min(portfolio.position, 100L);
-                portfolio.sell(bar.date, "SPY", bar.close, sell_qty, 1.0);
+                portfolio.sell(bar.date, "QQQM", bar.close, sell_qty, 1.0);
             }
         }
     }

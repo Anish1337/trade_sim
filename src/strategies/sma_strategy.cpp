@@ -33,14 +33,14 @@ void SMACrossoverStrategy::on_bar(const MarketData& bar, Portfolio& portfolio) {
         // Buy signal: short MA crosses above long MA
         if (prev_short_avg <= prev_long_avg && short_avg > long_avg) {
             if (portfolio.cash > bar.close * 100) { // Buy 100 shares if we have enough cash
-                portfolio.buy(bar.date, "SPY", bar.close, 100, 1.0);
+                portfolio.buy(bar.date, "QQQM", bar.close, 100, 1.0);
             }
         }
         // Sell signal: short MA crosses below long MA
         else if (prev_short_avg >= prev_long_avg && short_avg < long_avg) {
             if (portfolio.position > 0) {
                 long sell_qty = std::min(portfolio.position, 100L);
-                portfolio.sell(bar.date, "SPY", bar.close, sell_qty, 1.0);
+                portfolio.sell(bar.date, "QQQM", bar.close, sell_qty, 1.0);
             }
         }
     }

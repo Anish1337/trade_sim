@@ -2,7 +2,7 @@
 
 > **High-Performance C++20 Backtesting Engine** | **Modern Financial Engineering** | **Production-Ready Architecture**
 
-A sophisticated quantitative trading simulator built with modern C++20, featuring advanced backtesting capabilities, multiple trading strategies, and comprehensive performance analytics.
+A sophisticated quantitative trading simulator built with modern C++20, featuring advanced backtesting capabilities, multiple trading strategies, and comprehensive performance analytics on QQQM (NASDAQ 100 ETF) data.
 
 ## 🎯 **Key Highlights**
 
@@ -136,8 +136,10 @@ trade_sim/
 │       ├── ema_strategy.h/cpp
 │       └── mean_reversion_strategy.h/cpp
 ├── data/
-│   └── spy.csv                   # S&P 500 ETF historical data
+│   └── qqqm.csv                  # QQQM (NASDAQ 100 ETF) historical data
 ├── output/                       # Generated results and analytics
+├── scripts/                      # Utility scripts
+│   └── download_qqqm.py          # Data download script (one-time use)
 ├── main.cpp                      # Application entry point
 ├── Makefile                      # Professional build system
 └── README.md                     # This file
@@ -148,23 +150,23 @@ trade_sim/
 ```
 Quantitative Trading Simulator - Backtesting Engine
 
-Loaded 251 market data points
+Loaded 1060 market data points
 Running strategy comparison...
 
 === SMA Crossover Strategy ===
-Total Return: 0.08%
-Sharpe Ratio: -0.0563
-Max Drawdown: 59.65%
+Total Return: 5.75%
+Sharpe Ratio: 0.0465
+Max Drawdown: 19.09%
 Win Rate: 0.00%
-Total Trades: 4
-Execution Time: 14 microseconds
+Total Trades: 33
+Execution Time: 55 microseconds
 
 === Strategy Comparison Summary ===
 Strategy             Total Return Sharpe Ratio Max Drawdown Win Rate    
 --------             ------------ ------------ ------------ --------    
-SMA Crossover        0.08         -0.0563      59.65        0.00        
-EMA Crossover        -1.50        -0.0563      63.21        0.00        
-Mean Reversion       0.70         -0.0563      61.19        0.00        
+SMA Crossover        5.75         0.0465       19.09        0.00        
+EMA Crossover        6.55         0.0465       19.25        0.00        
+Mean Reversion       2.29         0.0465       18.52        0.00        
 ```
 
 ## 🎯 **Use Cases**
@@ -177,8 +179,9 @@ Mean Reversion       0.70         -0.0563      61.19        0.00
 
 ## 🔮 **Roadmap (v2.0+)**
 
-- **Live Data Integration**: Real-time market data feeds
-- **Concurrency**: Multi-threaded strategy execution
+- **Live Data Integration**: Real-time market data feeds via WebSocket/HTTP APIs
+- **C++ Market Data Extractor**: High-performance live data collection system
+- **Concurrency**: Multi-threaded strategy execution and async data processing
 - **Advanced Strategies**: Pairs trading, momentum, factor models
 - **Risk Management**: Position sizing, stop-losses, portfolio optimization
 - **Web Interface**: Real-time dashboard and monitoring
