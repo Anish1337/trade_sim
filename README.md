@@ -1,4 +1,4 @@
-# Quantitative Trading Simulator v1.0
+# Quantitative Trading Simulator v1.1
 
 > **High-Performance C++20 Backtesting Engine** | **Modern Financial Engineering** | **Production-Ready Architecture**
 
