@@ -62,7 +62,7 @@ LoadResult DataLoader::loadCSV_safe(const std::string& filename) {
             }
             
             // Parse prices with validation
-            auto parse_price = [&](double& price, const std::string& field_name) -> bool {
+            auto parse_price = [&](double& price, const std::string& /* field_name */) -> bool {
                 if (!std::getline(ss, item, ',')) return false;
                 try {
                     price = std::stod(clean_number(item));
@@ -126,47 +126,6 @@ LoadResult DataLoader::loadCSV_safe(const std::string& filename) {
     return result;
 }
 
-std::vector<MarketData> DataLoader::loadCSV(const std::string& filename) {
-    std::vector<MarketData> data;
-    std::ifstream file(filename);
-    std::string line;
-
-    if (!file.is_open()) {
-        std::cerr << "Error opening file: " << filename << "\n";
-        return data;
-    }
-
-    // Skip header line
-    std::getline(file, line);
-
-    while (std::getline(file, line)) {
-        std::stringstream ss(line);
-        std::string item;
-        MarketData row;
-
-        // Parse each field, handling quoted values
-        std::getline(ss, row.date, ',');
-        
-        std::getline(ss, item, ','); 
-        row.open = std::stod(clean_number(item));
-        
-        std::getline(ss, item, ','); 
-        row.high = std::stod(clean_number(item));
-        
-        std::getline(ss, item, ','); 
-        row.low = std::stod(clean_number(item));
-        
-        std::getline(ss, item, ','); 
-        row.close = std::stod(clean_number(item));
-        
-        std::getline(ss, item, ','); 
-        row.volume = std::stol(clean_number(item));
-
-        data.push_back(row);
-    }
-
-    return data;
-}
 
 void DataLoader::print_summary(const std::vector<MarketData>& data) {
     if (data.empty()) {

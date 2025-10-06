@@ -15,10 +15,7 @@
                 "cwd": "${workspaceFolder}"
             },
             "problemMatcher": ["$gcc"],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
+            "group": "build",
             "detail": "Build using CMake"
         },
         {
@@ -38,27 +35,34 @@
             "detail": "Configure CMake project"
         },
         {
-            "type": "cppbuild",
-            "label": "C/C++: g++ build active file",
+            "type": "shell",
+            "label": "Build Trade Simulator",
             "command": "g++",
             "args": [
-                "-fdiagnostics-color=always",
-                "-g",
                 "-std=c++20",
                 "-fconcepts",
                 "-fcoroutines",
-                "${file}",
+                "-g",
+                "-Wall",
+                "-Wextra",
+                "main.cpp",
                 "src/data_loader.cpp",
                 "src/backtester.cpp",
+                "src/strategies/sma_strategy.cpp",
+                "src/strategies/ema_strategy.cpp",
+                "src/strategies/mean_reversion_strategy.cpp",
                 "-o",
-                "${workspaceFolder}/main.exe"
+                "main"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
             },
             "problemMatcher": ["$gcc"],
-            "group": "build",
-            "detail": "Direct g++ compilation"
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Build the complete trading simulator"
         }
     ]
 }

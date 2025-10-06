@@ -38,10 +38,11 @@ struct Portfolio {
     double cash;
     long position;  // Number of shares held
     double total_value;
+    double initial_cash;
     std::vector<Trade> trades;
     
     Portfolio(double initial_cash = 100000.0) 
-        : cash(initial_cash), position(0), total_value(initial_cash) {}
+        : cash(initial_cash), position(0), total_value(initial_cash), initial_cash(initial_cash) {}
     
     // Portfolio management methods
     void buy(const std::string& date, const std::string& symbol, double price, long quantity, double commission = 0.0);
@@ -78,12 +79,13 @@ class Backtester {
 private:
     std::vector<MarketData> market_data;
     Portfolio portfolio;
+    double initial_cash;
     
 public:
     // Constructor with data loading
     explicit Backtester(const std::string& data_file, double initial_cash = 100000.0);
     
-    // Main backtesting method with C++20 concepts
+    // Main backtesting method
     template<TradingStrategy T>
     BacktestResult run_backtest(T& strategy, const std::string& start_date = "", const std::string& end_date = "") {
         auto start_time = std::chrono::high_resolution_clock::now();
@@ -95,7 +97,7 @@ public:
         }
         
         // Reset portfolio
-        portfolio = Portfolio(100000.0);
+        portfolio = Portfolio(initial_cash);
         
         // Run strategy on each bar
         for (const auto& bar : filtered_data) {
@@ -144,20 +146,4 @@ public:
     virtual ~Strategy() = default;
     virtual void on_bar(const MarketData& bar, Portfolio& portfolio) = 0;
     virtual std::string get_name() const = 0;
-};
-
-// Simple moving average crossover strategy
-class SMACrossoverStrategy : public Strategy {
-private:
-    int short_window;
-    int long_window;
-    std::vector<double> short_ma;
-    std::vector<double> long_ma;
-    
-public:
-    SMACrossoverStrategy(int short_w = 10, int long_w = 30) 
-        : short_window(short_w), long_window(long_w) {}
-    
-    void on_bar(const MarketData& bar, Portfolio& portfolio) override;
-    std::string get_name() const override { return "SMA Crossover"; }
 };

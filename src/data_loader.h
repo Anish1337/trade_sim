@@ -75,9 +75,6 @@ public:
     // Enhanced error handling 
     static LoadResult loadCSV_safe(const std::string& filename);
     
-    // Original version 
-    static std::vector<MarketData> loadCSV(const std::string& filename);
-    
     static void print_summary(const std::vector<MarketData>& data);
     static std::vector<MarketData> filter_by_date_range(
         const std::vector<MarketData>& data, 
